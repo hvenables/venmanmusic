@@ -267,9 +267,10 @@ Devise.setup do |config|
     Rails.application.credentials.spotify[:client_secret],
     scope: %w[
       playlist-read-private
+      playlist-read-collaborative
       user-read-private
       user-read-email
-    ].join(' ')
+    ].join(',')
   )
 
   # ==> Warden configuration

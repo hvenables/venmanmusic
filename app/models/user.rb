@@ -13,6 +13,9 @@ class User < ApplicationRecord
       user.country_code = auth.info.country_code
       user.href = auth.extra.raw_info.href
       user.password = Devise.friendly_token[0, 20]
+      user.access_token = auth.credentials.token
+      user.token_expires_at = Time.at(auth.credentials.expires_at)
+      user.refresh_token = auth.credentials.refresh_token
     end
   end
 end
