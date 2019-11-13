@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'httparty'
 gem 'devise'
 gem 'omniauth-spotify'
+gem 'haml'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

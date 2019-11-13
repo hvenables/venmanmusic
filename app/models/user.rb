@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:spotify]
 
+  has_many :playlists
+
   def self.from_omniauth(auth)
     find_or_create_by(uid: auth.uid) do |user|
       user.uid = auth.uid
@@ -17,5 +19,37 @@ class User < ApplicationRecord
       user.token_expires_at = Time.at(auth.credentials.expires_at)
       user.refresh_token = auth.credentials.refresh_token
     end
+  end
+
+  def spotify_playlists(page: 1, per: 25)
+    SpotifyPlaylist.find_by_user(user: self, page: page, per: per)
+  end
+
+  def renew_access_token
+    return if token_expires_at > Time.now
+
+    response = HTTParty.post(
+      'https://accounts.spotify.com/api/token',
+      body: {
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token
+      },
+      headers: {
+        'Authorization' => "Basic #{Base64.strict_encode64("#{client_id}:#{client_secret}")}"
+      }
+    )
+
+    update!(
+      access_token: response['access_token'],
+      token_expires_at: Time.now + response['expires_in'].seconds
+    )
+  end
+
+  def client_id
+    Rails.application.credentials.spotify[:client_id]
+  end
+
+  def client_secret
+    Rails.application.credentials.spotify[:client_secret]
   end
 end

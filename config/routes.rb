@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   devise_for :users,
              controllers: { omniauth_callbacks: 'user/omniauth_callbacks' }
 
-  root to: 'search#index'
+  root to: 'user#show'
 
-  resource :search, only: :index
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resource :user
+  resource :search, only: :show
+  resources :playlists, only: %i[create destroy]
 end

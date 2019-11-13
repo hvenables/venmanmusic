@@ -1,0 +1,33 @@
+%h1
+  = @user.name
+%table
+  %thead
+    %tr
+      %th
+        name
+      %th
+        href
+      %th
+        public
+      %th
+  %tbody
+    - @playlists.each do |playlist|
+      %tr
+        %td
+          = playlist.name
+        %td
+          = playlist.href
+        %td
+          = !playlist.private_playlist
+        %td
+          - if playlist.private_playlist
+          - elsif @my_playlists.map(&:uid).include?(playlist.id)
+            - my_playlist = @my_playlists.detect { |mp| mp.uid == playlist.id }
+            = button_to 'Remove',
+                        playlist_path(my_playlist.id),
+                        action: :destroy,
+                        id: my_playlist.id,
+                        method: :delete,
+                        form: { id: 'this' }
+          - else
+            = button_to 'Add', playlists_path, params: { uid: playlist.id }, form: { id: 'this' }
