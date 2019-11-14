@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:spotify]
 
   has_many :playlists
+  has_many :messages, foreign_key: :recipient_id
+  has_many :sent_messages, foreign_key: :sender_id
 
   def self.from_omniauth(auth)
     find_or_create_by(uid: auth.uid) do |user|

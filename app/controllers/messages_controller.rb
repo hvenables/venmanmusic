@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @messages = Message.where(recipient: current_user).order(created_at: :desc)
+    @messages = current_user.messages.order(created_at: :desc)
   end
 
   def new
