@@ -1,0 +1,24 @@
+%h2
+  Messages
+%table
+  %thead
+    %tr
+      %th
+        Message
+      %th
+        Playlist they applied for
+      %th
+        Sender
+      %th
+        Sent At
+  %tbody
+    - @messages.each do |message|
+      %tr
+        %td
+          #{message.message}
+        %td
+          #{message.playlist.name}
+        %td
+          #{message.sender.name}
+        %td
+          #{message.created_at}

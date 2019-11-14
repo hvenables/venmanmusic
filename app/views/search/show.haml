@@ -10,6 +10,7 @@
           name
         %th
           href
+        %th
     %tbody
       - @search_results.each do |playlist|
         %tr
@@ -17,3 +18,5 @@
             = playlist.name
           %td
             = playlist.href
+          %td
+            = link_to 'Apply', new_message_path(playlist_id: playlist.id)

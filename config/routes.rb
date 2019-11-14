@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   resource :user
   resource :search, only: :show, controller: :search
+  resources :messages, except: %i[edit update]
   resources :playlists, only: %i[create destroy]
 end

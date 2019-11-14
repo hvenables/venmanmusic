@@ -1,0 +1,6 @@
+%h5
+  Apply for the playlist: #{@playlist.name}
+= form_for @message do |f|
+  = f.hidden_field :playlist_id, value: @message.playlist_id
+  = f.text_area :message, rows: 10
+  = f.submit 'Send'

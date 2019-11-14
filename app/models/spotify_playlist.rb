@@ -13,7 +13,8 @@ class SpotifyPlaylist
     user.renew_access_token
 
     response = HTTParty.get(
-      "https://api.spotify.com/v1/me/playlists?offset#{(page - 1) * 25}&limit=#{per}",
+      "https://api.spotify.com/v1/me/playlists",
+      query: { offset: (page - 1) * per, limit: per },
       headers: { 'Authorization': "Bearer #{user.access_token}" }
     )
 
