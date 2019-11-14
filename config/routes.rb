@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   root to: 'user#show'
 
   resource :user
-  resource :search, only: :show
+  resource :search, only: :show, controller: :search
   resources :playlists, only: %i[create destroy]
 end

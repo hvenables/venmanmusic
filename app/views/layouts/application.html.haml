@@ -8,4 +8,7 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %nav
+      = link_to 'Profile', root_path
+      = link_to 'Search', search_path
     = yield
