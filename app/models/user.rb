@@ -24,6 +24,8 @@ class User < ApplicationRecord
       token_expires_at: Time.at(auth.credentials.expires_at),
       refresh_token: auth.credentials.refresh_token
     )
+
+    user
   end
 
   def spotify_playlists(page: 1, per: 25)
