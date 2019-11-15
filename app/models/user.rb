@@ -10,17 +10,20 @@ class User < ApplicationRecord
   has_many :sent_messages, foreign_key: :sender_id
 
   def self.from_omniauth(auth)
-    find_or_create_by(uid: auth.uid) do |user|
+    user = find_or_create_by(uid: auth.uid) do |user|
       user.uid = auth.uid
       user.email = auth.info.email
       user.name = auth.info.name
       user.country_code = auth.info.country_code
       user.href = auth.extra.raw_info.href
       user.password = Devise.friendly_token[0, 20]
-      user.access_token = auth.credentials.token
-      user.token_expires_at = Time.at(auth.credentials.expires_at)
-      user.refresh_token = auth.credentials.refresh_token
     end
+
+    user.update(
+      access_token: auth.credentials.token,
+      token_expires_at: Time.at(auth.credentials.expires_at),
+      refresh_token: auth.credentials.refresh_token
+    )
   end
 
   def spotify_playlists(page: 1, per: 25)
