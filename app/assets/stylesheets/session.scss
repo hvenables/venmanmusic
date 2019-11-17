@@ -1,14 +1,14 @@
-body {
+html, body {
   margin: 0;
+  height: 100vh;
 }
 
 .container {
   display: grid;
-  height: 100vh;
+  height: inherit;
 
   grid-template-areas: "sidebar content";
   grid-template-columns: 100px 1fr;
-  grid-template-rows: auto 1fr auto;
   grid-gap: 10px;
 
   a.nav-item {
@@ -25,7 +25,11 @@ body {
   grid-template-rows: 10px 60px 60px 60px 1fr 60px;
   grid-gap: 5px;
   background-color: #21252a;
-  height: inherit;
+
+  span {
+    padding: 0;
+    font-size: 12px;
+  }
 }
 
 .homepage {
