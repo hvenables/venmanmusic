@@ -9,20 +9,11 @@ html, body {
 
   grid-template-areas: "sidebar content";
   grid-template-columns: 100px 1fr;
-  grid-gap: 10px;
-
-  a.nav-item {
-    display: grid;
-    grid-template-rows: 20px 1fr;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-  }
 }
 
 .sidebar {
   display: grid;
-  grid-template-rows: 10px 60px 60px 60px 1fr 60px;
+  grid-template-rows: 60px 60px 60px 1fr 60px;
   grid-gap: 5px;
   background-color: #21252a;
 
@@ -30,7 +21,65 @@ html, body {
     padding: 0;
     font-size: 12px;
   }
+
+  a.nav-item {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20px 1fr;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 1rem;
+    color: white;
+  }
+
+  a.nav-profile {
+    grid-row: 1;
+  }
+
+  a.nav-search {
+    grid-row: 2;
+  }
+
+  a.nav-message {
+    grid-row: 3;
+  }
+
+  a.nav-log-out {
+    grid-row: 5;
+  }
 }
+
+.header {
+  display: grid;
+  height: 220px;
+  grid-column: 1 / 4;
+  grid-template-columns: 200px 200px 400px auto;
+  background-color: #1db954;
+  grid-gap: 10px;
+
+  img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    grid-column: 2;
+    border-radius: 100px;
+    height: 200px;
+  }
+
+  h1.name {
+    grid-column: 3;
+    padding-top: 50px;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: auto 80vw auto;
+}
+
+.middle {
+  grid-column: 2;
+}
+
 
 .homepage {
   height: 100vh;

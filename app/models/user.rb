@@ -28,6 +28,23 @@ class User < ApplicationRecord
     user
   end
 
+  def spotify_info
+    renew_access_token
+
+    response = HTTParty.get(
+      'https://api.spotify.com/v1/me',
+      headers: { 'Authorization' => "Bearer #{access_token}" }
+    )
+
+    update_user_info(
+      followers: response.dig('followers', 'total'),
+      image: response.dig('images', 0, 'url'),
+      name: response['display_name']
+    )
+
+    response
+  end
+
   def spotify_playlists(page: 1, per: 25)
     SpotifyPlaylist.find_by_user(user: self, page: page, per: per)
   end
@@ -42,7 +59,7 @@ class User < ApplicationRecord
         refresh_token: refresh_token
       },
       headers: {
-        'Authorization' => "Basic #{Base64.strict_encode64("#{client_id}:#{client_secret}")}"
+        'Authorization' => app_authorization_token
       }
     )
 
@@ -52,11 +69,23 @@ class User < ApplicationRecord
     )
   end
 
-  def client_id
-    Rails.application.credentials.spotify[:client_id]
+  def app_authorization_token
+    <<-TOKEN.squish
+      Basic #{Base64.strict_encode64(
+        Rails.application.credentials.spotify[:client_id] +
+        ':' +
+        Rails.application.credentials.spotify[:client_secret]
+      )}
+    TOKEN
   end
 
-  def client_secret
-    Rails.application.credentials.spotify[:client_secret]
+  private
+
+  def update_user_info(followers:, image:, name:)
+    update(
+      name: name,
+      followers: followers,
+      image: image
+    )
   end
 end
