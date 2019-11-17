@@ -8,11 +8,22 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %nav
-      - if user_signed_in?
-        = link_to 'Profile', root_path
-        = link_to 'Search', search_path
-        = link_to 'Messages', messages_path
-        %li
-          = link_to('Logout', destroy_user_session_path, method: :delete)
-    = yield
+    - if user_signed_in?
+      .container
+        .sidebar
+          .space
+          = link_to root_path, class: 'nav-item' do
+            = fa_icon('user', text: 'Profile')
+          = link_to search_path, class: 'nav-item' do
+            = fa_icon('search', text: 'Search')
+          = link_to messages_path, class: 'nav-item' do
+            = fa_icon('envelope', text: 'Messages')
+          .space
+          = link_to destroy_user_session_path, method: :delete, class: 'nav-item' do
+            = fa_icon('sign-out-alt', text: 'Logout')
+
+        .content
+          = yield
+    - else
+      .homepage
+        = yield

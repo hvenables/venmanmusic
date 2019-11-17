@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+}
+
+.container {
+  display: grid;
+  height: 100vh;
+
+  grid-template-areas: "sidebar content";
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 10px;
+
+  a.nav-item {
+    display: grid;
+    grid-template-rows: 20px 1fr;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.sidebar {
+  display: grid;
+  grid-template-rows: 10px 60px 60px 60px 1fr 60px;
+  grid-gap: 5px;
+  background-color: #21252a;
+  height: inherit;
+}

@@ -25,6 +25,7 @@ gem 'httparty'
 gem 'devise'
 gem 'omniauth-spotify'
 gem 'haml'
+gem 'font_awesome5_rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
