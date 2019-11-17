@@ -1,22 +1,24 @@
-= form_with url: search_path, method: :get, data: { remote: false } do |f|
-  = f.text_field :search
-  = f.submit 'Search'
+.header
+.middle
+  = form_with url: search_path, method: :get, data: { remote: false } do |f|
+    = f.text_field :search
+    = f.submit 'Search'
 
-- if @search_results&.any?
-  %table
-    %thead
-      %tr
-        %th
-          name
-        %th
-          href
-        %th
-    %tbody
-      - @search_results.each do |playlist|
+  - if @search_results&.any?
+    %table
+      %thead
         %tr
-          %td
-            = playlist.name
-          %td
-            = playlist.href
-          %td
-            = link_to 'Apply', new_message_path(playlist_id: playlist.id)
+          %th
+            name
+          %th
+            href
+          %th
+      %tbody
+        - @search_results.each do |playlist|
+          %tr
+            %td
+              = playlist.name
+            %td
+              = playlist.href
+            %td
+              = link_to 'Apply', new_message_path(playlist_id: playlist.id)

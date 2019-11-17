@@ -51,9 +51,8 @@ html, body {
 
 .header {
   display: grid;
-  height: 220px;
   grid-column: 1 / 4;
-  grid-template-columns: 200px 200px 400px auto;
+  grid-template-columns: 10vw 200px 400px auto;
   background-color: #1db954;
   grid-gap: 10px;
 
@@ -65,15 +64,17 @@ html, body {
     height: 200px;
   }
 
-  h1.name {
+  ul {
     grid-column: 3;
-    padding-top: 50px;
+    padding-top: 20px;
+    list-style-type: none;
   }
 }
 
 .content {
   display: grid;
-  grid-template-columns: auto 80vw auto;
+  grid-template-columns: 5vw 80vw 10vw;
+  grid-template-rows: 220px auto;
 }
 
 .middle {

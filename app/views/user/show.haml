@@ -1,7 +1,13 @@
 .header
   = image_tag @user.image
-  %h1.name
-    = @user.name
+  %ul
+    %li
+      %h2.name
+        = @user.name
+    %li
+      Listed playlists #{@user.playlists.count}
+    %li
+      Followers: #{@user.followers}
 .middle
   - if params[:page]&.to_i&.>(1)
     = link_to 'Previous Page', root_path(page: params[:page].to_i - 1, per: 25)
